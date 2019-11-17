@@ -1,2 +1,2 @@
 # turtlebot_object_avoidance
-A package which adds object avoidance capability to the Turtle bot.
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
