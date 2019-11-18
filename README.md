@@ -47,7 +47,11 @@ source ./devel/setup.bash
 ```
 * Running the package using launch file
 ```
-roslaunch turtlebot_object_avoidance demo.launch
+roslaunch turtlebot_object_avoidance demo.launch 
+```
+* Running the package using launch file with recording in rosbag off
+```
+roslaunch turtlebot_object_avoidance demo.launch bagrecord:=0
 ```
 
 ## Custom world for the gazebo simulation:
@@ -58,6 +62,15 @@ roslaunch turtlebot_object_avoidance demo.launch
 </p>
 </p>
 
+## Performing checks on the package
 
+For cppcheck, run the following command in the terminal inside the package
+```
+cppcheck --enable=all --std=c++11 -I ../.. -I ../../../../../../../opt/ros/kinetic/include/ -I ../../../../../../../usr/include/ --check-config --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" )
 
+```
 
+For cpplint, run the following command in the terminal inside the package
+```
+cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
+```
