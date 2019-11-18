@@ -45,4 +45,19 @@ cd path_to_catkin_workspace
 catkin_make
 source ./devel/setup.bash
 ```
+* Running the package using launch file
+```
+roslaunch turtlebot_object_avoidance demo.launch
+```
+
+## Custom world for the gazebo simulation:
+
+</p>
+<p align="center">
+<img src="/images/gazebo.png">
+</p>
+</p>
+
+
+
 

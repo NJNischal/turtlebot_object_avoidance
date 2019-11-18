@@ -23,7 +23,7 @@
  * @brief main file for the package
  */
 
-#include "include/Navigation.h"
+#include "../include/Navigation.h"
 
 /**
  * @brief      the main function of the package

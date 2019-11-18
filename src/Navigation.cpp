@@ -28,7 +28,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include "include/Navigation.h"
+#include "../include/Navigation.h"
 
 Navigation::Navigation() {
 // Initialization of the obstacle status value
