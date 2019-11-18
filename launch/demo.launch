@@ -1,0 +1,16 @@
+<launch>
+
+    
+<include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+    <arg name="world_file" value="$(find turtlebot_object_avoidance)/launch/turtleBot_simul.world"/>
+    </include>
+
+	<node
+	pkg="turtlebot_object_avoidance"
+	name="Navigator"
+	type="turtlebot_object_avoidance"
+	output="screen"
+	
+    />
+
+</launch>
