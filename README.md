@@ -54,7 +54,7 @@ roslaunch turtlebot_object_avoidance demo.launch
 
 </p>
 <p align="center">
-<img src="/images/gazebo.png">
+<img src="/images/Gazebo.png">
 </p>
 </p>
 
