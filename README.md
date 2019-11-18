@@ -53,6 +53,17 @@ roslaunch turtlebot_object_avoidance demo.launch
 ```
 roslaunch turtlebot_object_avoidance demo.launch bagrecord:=0
 ```
+## Playing the rosbag
+
+Run the following command in the rosbag folder in the repo:
+```
+rosbag play rosbag_2019-11-18-14-10-53.bag
+```
+
+The publishing topic can be viewed using the following command in a new terminal:
+```
+rostopic echo /mobile_base/commands/velocity
+```
 
 ## Custom world for the gazebo simulation:
 
