@@ -13,7 +13,7 @@
   <node pkg="rosbag" 
 	type="record" 
 	name="turtlebot_object_avoidance" 
-	args="record -o /$(find turtlebot_object_avoidance)/rosbag/rosbag.bag --duration=18" 
+	args="record -o /$(find turtlebot_object_avoidance)/rosbag/rosbag.bag -a -x /camera/(.*) --duration=18" 
 	if="$(arg bagrecord)">
   </node>
 
