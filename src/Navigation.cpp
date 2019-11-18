@@ -28,22 +28,21 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include "Navigation.h"
+#include "include/Navigation.h"
 
 Navigation::Navigation() {
-
-	//Initialization of the obstacle status value
-	obsStatus = false;
-	//Initialization of the proximity value
-	proximity = 0.0;
+// Initialization of the obstacle status value
+obsStatus = false;
+// Initialization of the proximity value
+proximity = 0.0;
 }
 
 void Navigation::initialPublisherTwist() {
-  //Initializing the publisher to publish the twist messages
-	publishVel = nh.advertise<geometry_msgs::Twist>(
+// Initializing the publisher to publish the twist messages
+publishVel = nh.advertise<geometry_msgs::Twist>(
       "/mobile_base/commands/velocity", 100);
-  //Streaming the publisher status message
-  ROS_INFO_STREAM("Publisher active");
+// Streaming the publisher status message
+ROS_INFO_STREAM("Publisher active");
 }
 /**
  * @brief Initialization of the Subscriber for the laser scan
@@ -51,8 +50,8 @@ void Navigation::initialPublisherTwist() {
  * @return void
  */
 void Navigation::initialSubscriberScan() {
-  subScan = nh.subscribe("scan",100,&Navigation::scanCallback,this);
-  //Streaming the subscriber status message.
+  subScan = nh.subscribe("scan", 100, &Navigation::scanCallback, this);
+  // Streaming the subscriber status message.
   ROS_INFO_STREAM("Subscriber Active");
 }
 /**
@@ -64,13 +63,13 @@ void Navigation::scanCallback(const sensor_msgs::LaserScan::ConstPtr &msgScan) {
   obsStatus = false;
   proximity = *(msgScan->ranges.begin());
   // To get the nearest value of the obstacle by iterating through the values.
-  for(auto i :msgScan->ranges) {
-    if(i < proximity && !std::isnan(i)) {
-      //Set the smallest value to the proximity.
+for(auto i : msgScan->ranges) {
+    if (i < proximity && !std::isnan(i)) {
+      // Set the smallest value to the proximity.
       proximity = i;
     }
   }
-  //Check if the obstacle not in the search space.
+  // Check if the obstacle not in the search space.
   if (std::isnan(proximity)) {
     ROS_INFO_STREAM("Path clear,no Obstacle ahead");
   } else {
@@ -82,9 +81,8 @@ void Navigation::scanCallback(const sensor_msgs::LaserScan::ConstPtr &msgScan) {
     ROS_WARN_STREAM("Object found");
     ROS_INFO_STREAM("Object found ahead. Making a turn to proceed");
   }
-  //Function to move the robot
+  // Function to move the robot
   moveRobot(obsStatus);
-
 }
 /**
  * @brief Function to move the robot according to the object status.
@@ -93,15 +91,15 @@ void Navigation::scanCallback(const sensor_msgs::LaserScan::ConstPtr &msgScan) {
  */
 void Navigation::moveRobot(bool obsStatus) {
   if (obsStatus) {
-    //Angular movement of the robot.
+    // Angular movement of the robot.
     twistMsg.linear.x = 0;
     twistMsg.angular.z = 1.0;
   } else {
-    //Move in the forward direction.
+    // Move in the forward direction.
     twistMsg.linear.x = 0.5;
     twistMsg.angular.z = 0.0;
   }
-  //publish the values to the robot to follow.
+  // publish the values to the robot to follow.
   publishVel.publish(twistMsg);
 }
 
